@@ -1,10 +1,10 @@
 language: python
 python:
- - "2.5"
  - "2.6"
  - "2.7"
+ - "3.3"  # placeholder, actually will install 2.5 there
 script:
- - if [[ $TRAVIS_PYTHON_VERSION == '2.5' ]]; then NWORKERS=4 PYTHON=python$TRAVIS_PYTHON_VERSION make travis_cpython_25; fi
+ - if [[ $TRAVIS_PYTHON_VERSION == '3.3' ]]; then NWORKERS=4 PYTHON=python2.5 make travis_cpython_25; fi
  - if [[ $TRAVIS_PYTHON_VERSION != '2.5' ]]; then NWORKERS=4 PYTHON=python$TRAVIS_PYTHON_VERSION make travis_cpython; fi
 notifications:
   email: false
