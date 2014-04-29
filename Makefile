@@ -94,7 +94,7 @@ travis_cpython:
 	sudo -E PYTHON=${PYTHON}-dbg GEVENTSETUP_EV_VERIFY=3 make travistest
 
 travis_cpython_25:
-	sudo -e apt-get install ${PYTHON}
+	sudo -E apt-get -qq -y install ${PYTHON}
 	make travis_cpython_base
 
 
