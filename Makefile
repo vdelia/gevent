@@ -69,7 +69,7 @@ travis_pypy:
 	make bench
 	cd greentest && ${PYTHON} testrunner.py --config ../known_failures.py
 
-travis_cpython_base:
+travis_cpython:
 	make whitespace
 
 	pip install -q pep8
@@ -87,15 +87,21 @@ travis_cpython_base:
 	unzip -q greenlet-*.zip
 
 	sudo -E make travistest
-
-travis_cpython:
-	make travis_cpython_base
 	sudo -E apt-get -qq -y install ${PYTHON}-dbg
 	sudo -E PYTHON=${PYTHON}-dbg GEVENTSETUP_EV_VERIFY=3 make travistest
 
 travis_cpython_25:
 	sudo -E apt-get -qq -y install ${PYTHON}
-	make travis_cpython_base
+
+	sudo add-apt-repository -y ppa:chris-lea/cython
+	sudo apt-get -qq -y update
+	sudo apt-get -qq -y install cython
+	cython --version
+
+	pip install -q --download . greenlet
+	unzip -q greenlet-*.zip
+
+	sudo -E make travistest
 
 
 .PHONY: clean all doc pep8 whitespace pyflakes lint travistest travis
